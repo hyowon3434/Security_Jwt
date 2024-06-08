@@ -10,19 +10,37 @@ package com.example.security1.config.auth;
 // 시큐리티 세션 => Authentication => UserDetails(PrincipalDetails)
 
 import com.example.security1.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
-public class PrincipalDetails implements UserDetails {
+@Data
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user;  // 콤포지션
+    private Map<String, Object> attributes;
 
     public PrincipalDetails(User user){
         this.user = user;
     }
+
+    // OAuth2User overriding 메소드
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+//===============================================================================================
+    // UserDetails overriding methods
 
     // 해당 User의 권한을 리턴하는 곳!!
     @Override
@@ -70,6 +88,7 @@ public class PrincipalDetails implements UserDetails {
 
         return true;
     }
+
 
 
 }
