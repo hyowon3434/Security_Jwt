@@ -42,8 +42,5 @@ public class SecurityConfig {
                 return http.build();
     }
 
-    @Bean // 해당 메서드의 리턴되는 오브젝트를 IoC로 등록해준다.
-    public BCryptPasswordEncoder bCryptPasswordEncoder() throws Exception{
-        return new BCryptPasswordEncoder();
-    }
+
 }

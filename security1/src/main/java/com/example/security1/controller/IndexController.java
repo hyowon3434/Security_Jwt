@@ -54,7 +54,9 @@ public class IndexController {
     }
 
     @GetMapping("/user")
-    public @ResponseBody String user(@AuthenticationPrincipal OAuth2User userDetails){
+    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails userDetails){
+        System.out.println("principalDetails : " + userDetails.getUser());
+
         return "user";
     }
 
